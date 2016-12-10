@@ -100,6 +100,7 @@ class Streamer(oandapy.Streamer):
     def __init__(self, q, headers=None, *args, **kwargs):
         # Override to provide headers, which is in the standard API interface
         super(Streamer, self).__init__(*args, **kwargs)
+        self.api_url = 'http://localhost:8080'
 
         if headers:
             self.client.headers.update(headers)
@@ -230,6 +231,7 @@ class OandaStore(with_metaclass(MetaSingleton, object)):
         self.oapi = API(environment=self._oenv,
                         access_token=self.p.token,
                         headers={'X-Accept-Datetime-Format': 'UNIX'})
+        self.oapi.api_url = 'http://localhost:8080'
 
         self._cash = 0.0
         self._value = 0.0
